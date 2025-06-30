@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Unicorn;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class UnicornController extends Controller
 {
+    use AuthorizesRequests;
+
     public function index()
     {
         $unicorns = Unicorn::where('is_active', true)->get();

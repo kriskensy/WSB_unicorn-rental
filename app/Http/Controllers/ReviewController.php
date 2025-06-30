@@ -6,9 +6,12 @@ use App\Models\Review;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class ReviewController extends Controller
 {
+    use AuthorizesRequests;
+
     public function index()
     {
         $reviews = Review::where('user_id', Auth::id())->with('reservation.unicorn')->get();
@@ -17,7 +20,7 @@ class ReviewController extends Controller
 
     public function create(Request $request)
     {
-        $reservationId = $request->get('reservation_id');
+        $reservationId = $request->get('reservation');
         $reservation = Reservation::where('id', $reservationId)
             ->where('user_id', Auth::id())
             ->firstOrFail();

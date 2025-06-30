@@ -27,7 +27,7 @@
                     <label for="rent_date" class="block text-sm font-semibold text-gray-200 mb-2">Reservation Date</label>
                     <input type="datetime-local" name="rent_date" id="rent_date"
                            class="w-full bg-gray-900 text-gray-100 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                           value="{{ old('rent_date', $reservation->rent_date->format('Y-m-d\TH:i')) }}" required>
+                           value="{{ old('rent_date', (is_object($reservation->rent_date) ? $reservation->rent_date->format('Y-m-d\TH:i') : $reservation->rent_date)) }}">
                     @error('rent_date') <div class="text-red-400 text-xs mt-1">{{ $message }}</div> @enderror
                 </div>
                 <div>

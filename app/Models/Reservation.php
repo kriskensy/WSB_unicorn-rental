@@ -16,6 +16,11 @@ class Reservation extends Model
         'duration_hours',
     ];
 
+    //dzięki casts eloquent zwraca obiekt Carbon
+    protected $casts = [
+        'rent_date' => 'datetime',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

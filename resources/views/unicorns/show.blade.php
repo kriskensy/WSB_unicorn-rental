@@ -71,5 +71,8 @@
         @else
             <p class="text-gray-400">No reviews yet.</p>
         @endif
+        <div class="mt-8">
+            <a href="{{ route('unicorns.index') }}" class="px-6 py-2 bg-gray-600 text-gray-200 rounded-lg hover:bg-gray-700 transition">Back to list</a>
+        </div>
     </div>
 @endsection

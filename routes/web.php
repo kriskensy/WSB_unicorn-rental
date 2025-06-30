@@ -30,10 +30,11 @@ Route::get('unicorns/{unicorn}', [UnicornController::class, 'show'])
 //rezerwacje + recenzje: zalogowani userzy
 Route::middleware('auth')->group(function () {
     Route::resource('reservations', ReservationController::class);
-    Route::resource('reviews', ReviewController::class)->except(['create']);
-    // Tworzenie recenzji tylko po rezerwacji
+    //tworzenie recenzji tylko po rezerwacji
     Route::get('reviews/create', [ReviewController::class, 'create'])
         ->name('reviews.create');
+    Route::resource('reviews', ReviewController::class)->except(['create']);
+
 });
 
 //autoryzacja breeze: logowanie, rejestracja, reset hasła

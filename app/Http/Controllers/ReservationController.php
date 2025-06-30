@@ -6,9 +6,11 @@ use App\Models\Reservation;
 use App\Models\Unicorn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class ReservationController extends Controller
 {
+    use AuthorizesRequests;
     public function index()
     {
         $reservations = Reservation::where('user_id', Auth::id())->with('unicorn')->get();
