@@ -13,6 +13,9 @@
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Mane Color</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Skills</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Rating</th>
+                @if(auth()->check() && auth()->user()->role === 'admin')
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Actions</th>
+                @endif
             </tr>
             </thead>
             <tbody class="divide-y divide-gray-700">
@@ -40,6 +43,16 @@
                             <span class="text-gray-400">No rating yet</span>
                         @endif
                     </td>
+                    @if(auth()->check() && auth()->user()->role === 'admin')
+                        <td class="px-6 py-4 whitespace-nowrap flex gap-2">
+                            <a href="{{ route('unicorns.edit', $unicorn) }}" class="text-yellow-400 hover:text-yellow-600">Edit</a>
+                            <form action="{{ route('unicorns.destroy', $unicorn) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-400 hover:text-red-600" onclick="return confirm('Delete this unicorn?')">Delete</button>
+                            </form>
+                        </td>
+                    @endif
                 </tr>
             @endforeach
             </tbody>
